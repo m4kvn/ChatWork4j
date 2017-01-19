@@ -1,9 +1,9 @@
 package com.masahirosaito.chatwork4j.data.rooms
 
-import com.google.gson.Gson
-import com.masahirosaito.chatwork4j.ChatWork4j.Companion.getJsonFromResponse
 import com.masahirosaito.chatwork4j.ChatWork4j.Companion.getObjectFromGson
+import com.masahirosaito.chatwork4j.ChatWork4j.Companion.post
 import com.masahirosaito.chatwork4j.data.my.Task
+import okhttp3.FormBody
 
 /**
  * Created by masahiro on 2017/01/19.
@@ -33,6 +33,11 @@ data class Room(
         }
         return getObjectFromGson(url, Array<Message>::class.java)
     }
+
+    fun postMessage(message: String) : String = post(
+            "/rooms/$room_id/messages",
+            FormBody.Builder().add("body", message).build()
+    )
 
     fun getMessage(messageId: Int) : Message? =
             getObjectFromGson("/rooms/$room_id/messages/$messageId", Message::class.java)

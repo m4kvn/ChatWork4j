@@ -6,8 +6,7 @@ import com.masahirosaito.chatwork4j.data.rooms.Room
 import com.masahirosaito.chatwork4j.data.contacts.Contact
 import com.masahirosaito.chatwork4j.data.my.Status
 import com.masahirosaito.chatwork4j.data.my.Task
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import okhttp3.*
 
 /**
  * Created by masahiro on 2017/01/19.
@@ -34,6 +33,16 @@ class ChatWork4j(val TOKEN: String) {
             val json = getJsonFromResponse(url)
             if (json.isNullOrBlank()) return null
             else return Gson().fromJson(json, clazz)
+        }
+
+        fun post(url: String, body: RequestBody) : String {
+            val request = Request.Builder()
+                    .url(CHATWORK_API_URL_ROOT + url)
+                    .addHeader(CHATWORK_API_TOKEN_HEADER, CHATWORK_API_TOKEN)
+                    .post(body)
+                    .build()
+            val response = client.newCall(request).execute()
+            return response.body().string()
         }
     }
 
