@@ -9,5 +9,6 @@ data class File(
         val message_id: Int,
         val filename: String,
         val filesize: Int,
-        val upload_time: Long
+        val upload_time: Long,
+        val download_url: String
 )
