@@ -68,4 +68,9 @@ class ChatWork4j(val TOKEN: String) {
             getJsonFromResponse("/rooms/${this.room_id}/messages?force=$force"),
             Array<Message>::class.java
     )
+
+    fun Room.getMessage(messageId: Int) : Message = Gson().fromJson(
+            getJsonFromResponse("/rooms/${this.room_id}/messages/$messageId"),
+            Message::class.java
+    )
 }
