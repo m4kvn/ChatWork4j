@@ -1,7 +1,7 @@
 package com.masahirosaito.chatwork4j
 
 import com.google.gson.Gson
-import com.masahirosaito.chatwork4j.data.MyStatus
+import com.masahirosaito.chatwork4j.data.Status
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
@@ -23,8 +23,8 @@ class ChatWork4j(val TOKEN: String) {
         return response.body().string()
     }
 
-    fun getMyStatus() : MyStatus = Gson().fromJson(
+    fun getMyStatus() : Status = Gson().fromJson(
             getJsonFromResponse("/my/status"),
-            MyStatus::class.java
+            Status::class.java
     )
 }
