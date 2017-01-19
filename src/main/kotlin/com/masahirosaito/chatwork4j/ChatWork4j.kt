@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.masahirosaito.chatwork4j.data.Me
 import com.masahirosaito.chatwork4j.data.Message
 import com.masahirosaito.chatwork4j.data.Room
-import com.masahirosaito.chatwork4j.data.Status
+import com.masahirosaito.chatwork4j.data.my.Status
 import okhttp3.OkHttpClient
 import okhttp3.Request
 

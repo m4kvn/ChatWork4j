@@ -1,4 +1,4 @@
-package com.masahirosaito.chatwork4j.data
+package com.masahirosaito.chatwork4j.data.my
 
 /**
  * Created by masahiro on 2017/01/19.
