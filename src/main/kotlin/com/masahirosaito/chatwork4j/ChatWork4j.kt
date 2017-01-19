@@ -6,8 +6,8 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 
 /**
-* Created by masahiro on 2017/01/19.
-*/
+ * Created by masahiro on 2017/01/19.
+ */
 class ChatWork4j(val TOKEN: String) {
     val CHATWORK_API_URL_ROOT = "https://api.chatwork.com/v1"
     val CHATWORK_API_TOKEN_HEADER = "X-ChatWorkToken"

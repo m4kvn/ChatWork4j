@@ -1,8 +1,8 @@
 package com.masahirosaito.chatwork4j.data
 
 /**
-* Created by masahiro on 2017/01/19.
-*/
+ * Created by masahiro on 2017/01/19.
+ */
 data class Room(
         val room_id: Int,
         val name: String,
