@@ -1,7 +1,5 @@
 package com.masahirosaito.chatwork4j.data.rooms
 
-import com.masahirosaito.chatwork4j.data.rooms.Account
-
 /**
  * Created by masahiro on 2017/01/19.
  */
