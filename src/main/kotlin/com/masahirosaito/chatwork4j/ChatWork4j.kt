@@ -27,7 +27,7 @@ class ChatWork4j(val TOKEN: String) {
         return response.body().string()
     }
 
-    fun getMy() : Me = Gson().fromJson(
+    fun getMe() : Me = Gson().fromJson(
             getJsonFromResponse("/me"),
             Me::class.java
     )
@@ -35,6 +35,11 @@ class ChatWork4j(val TOKEN: String) {
     fun getMyStatus() : Status = Gson().fromJson(
             getJsonFromResponse("/my/status"),
             Status::class.java
+    )
+
+    fun getMyTasks() : Array<Task> = Gson().fromJson(
+            getJsonFromResponse("/my/tasks"),
+            Array<Task>::class.java
     )
 
     fun getRooms() : Array<Room> = Gson().fromJson(
@@ -45,10 +50,5 @@ class ChatWork4j(val TOKEN: String) {
     fun getMessages(roomId: Int, force: Int) : Array<Message> = Gson().fromJson(
             getJsonFromResponse("/rooms/$roomId/messages?force=$force"),
             Array<Message>::class.java
-    )
-
-    fun getMyTasks() : Array<Task> = Gson().fromJson(
-            getJsonFromResponse("/my/tasks"),
-            Array<Task>::class.java
     )
 }
