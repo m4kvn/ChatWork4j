@@ -22,4 +22,9 @@ class ChatWork4j(val TOKEN: String) {
         val response = client.newCall(request).execute()
         return response.body().string()
     }
+
+    fun getMyStatus() : MyStatus = Gson().fromJson(
+            getJsonFromResponse("/my/status"),
+            MyStatus::class.java
+    )
 }
