@@ -50,15 +50,9 @@ data class Room(
 
         val url = buildString { append("/rooms/$room_id/tasks")
             if (account_id != null || assigned_by_account_id != null || status != null) { append("?")
-                if (account_id != null) append("account_id=$account_id")
-                if (assigned_by_account_id != null) {
-                    if (!endsWith("?")) append("&")
-                    append("assigned_by_account_id=$assigned_by_account_id")
-                }
-                if (status != null) {
-                    if (!endsWith("?")) append("&")
-                    append("status=${status.name.toLowerCase()}")
-                }
+                if (account_id != null)             append("&account_id=$account_id")
+                if (assigned_by_account_id != null) append("&assigned_by_account_id=$assigned_by_account_id")
+                if (status != null)                 append("&status=${status.name.toLowerCase()}")
             }
         }
 
