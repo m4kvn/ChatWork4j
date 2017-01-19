@@ -7,6 +7,7 @@ import com.masahirosaito.chatwork4j.data.rooms.Room
 import com.masahirosaito.chatwork4j.data.contacts.Contact
 import com.masahirosaito.chatwork4j.data.my.Status
 import com.masahirosaito.chatwork4j.data.my.Task
+import com.masahirosaito.chatwork4j.data.rooms.File
 import com.masahirosaito.chatwork4j.data.rooms.Member
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -82,5 +83,15 @@ class ChatWork4j(val TOKEN: String) {
     fun Room.getTask(taskId: Int) : Task = Gson().fromJson(
             getJsonFromResponse("/rooms/${this.room_id}/tasks/$taskId"),
             Task::class.java
+    )
+
+    fun Room.getFiles() : Array<File> = Gson().fromJson(
+            getJsonFromResponse("/rooms/${this.room_id}/files"),
+            Array<File>::class.java
+    )
+
+    fun Room.getFile(fileId: Int) : File = Gson().fromJson(
+            getJsonFromResponse("/rooms/${this.room_id}/files/$fileId"),
+            File::class.java
     )
 }
