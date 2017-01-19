@@ -7,6 +7,7 @@ import com.masahirosaito.chatwork4j.data.rooms.Room
 import com.masahirosaito.chatwork4j.data.contacts.Contact
 import com.masahirosaito.chatwork4j.data.my.Status
 import com.masahirosaito.chatwork4j.data.my.Task
+import com.masahirosaito.chatwork4j.data.rooms.Member
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
@@ -56,6 +57,11 @@ class ChatWork4j(val TOKEN: String) {
     fun getRoom(roomId: Int) : Room = Gson().fromJson(
             getJsonFromResponse("/rooms/$roomId"),
             Room::class.java
+    )
+
+    fun Room.getMembers() : Array<Member> = Gson().fromJson(
+            getJsonFromResponse("/rooms/${this.room_id}/members"),
+            Array<Member>::class.java
     )
 
     fun Room.getMessages(force: Int) : Array<Message> = Gson().fromJson(
