@@ -1,0 +1,13 @@
+package com.masahirosaito.chatwork4j.data
+
+/**
+* Created by masahiro on 2017/01/19.
+*/
+data class MyStatus(
+        val unread_room_num: Int,
+        val mention_room_num: Int,
+        val mytask_room_num: Int,
+        val unread_num: Int,
+        val mention_num: Int,
+        val mytask_num: Int
+)
