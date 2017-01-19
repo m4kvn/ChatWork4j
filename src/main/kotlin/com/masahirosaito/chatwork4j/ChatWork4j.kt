@@ -2,8 +2,8 @@ package com.masahirosaito.chatwork4j
 
 import com.google.gson.Gson
 import com.masahirosaito.chatwork4j.data.Me
-import com.masahirosaito.chatwork4j.data.Message
-import com.masahirosaito.chatwork4j.data.Room
+import com.masahirosaito.chatwork4j.data.rooms.Message
+import com.masahirosaito.chatwork4j.data.rooms.Room
 import com.masahirosaito.chatwork4j.data.contacts.Contact
 import com.masahirosaito.chatwork4j.data.my.Status
 import com.masahirosaito.chatwork4j.data.my.Task
