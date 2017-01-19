@@ -24,25 +24,20 @@ data class Room(
         val last_update_time: Long,
         val description: String
 ) {
-    fun getMembers() : Array<Member> = Gson().fromJson(
-            getJsonFromResponse("/rooms/${this.room_id}/members"),
-            Array<Member>::class.java
-    )
+    fun getMembers() : Array<Member>? = getObjectFromGson("/rooms/$room_id/members", Array<Member>::class.java)
 
-    fun getMessages(force: Int) : Array<Message> = Gson().fromJson(
-            getJsonFromResponse("/rooms/${this.room_id}/messages?force=$force"),
-            Array<Message>::class.java
-    )
+    fun getMessages(force: Boolean = false) : Array<Message>? {
+        val url = buildString {
+            append("/rooms/$room_id/messages?force=")
+            if (force) append("1") else append("0")
+        }
+        return getObjectFromGson(url, Array<Message>::class.java)
+    }
 
-    fun getMessage(messageId: Int) : Message = Gson().fromJson(
-            getJsonFromResponse("/rooms/${this.room_id}/messages/$messageId"),
-            Message::class.java
-    )
+    fun getMessage(messageId: Int) : Message? =
+            getObjectFromGson("/rooms/$room_id/messages/$messageId", Message::class.java)
 
-    fun getTask(taskId: Int) : Task = Gson().fromJson(
-            getJsonFromResponse("/rooms/${this.room_id}/tasks/$taskId"),
-            Task::class.java
-    )
+    fun getTask(taskId: Int) : Task? = getObjectFromGson("/rooms/$room_id/tasks/$taskId", Task::class.java)
 
     fun getTasks(account_id: Int? = null,
                 assigned_by_account_id: Int? = null,
