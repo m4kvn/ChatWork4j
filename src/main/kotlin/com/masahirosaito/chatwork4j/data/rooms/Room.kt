@@ -69,7 +69,7 @@ data class Room(
             Array<File>::class.java
     )
 
-    fun getFile(fileId: Int, createDownloadUrl: Boolean) : File? {
+    fun getFile(fileId: Int, createDownloadUrl: Boolean = false) : File? {
         val url = buildString {
             append("/rooms/$room_id/files/$fileId")
             if (createDownloadUrl) append("?create_download_url=1")
