@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.masahirosaito.chatwork4j.data.Me
 import com.masahirosaito.chatwork4j.data.Message
 import com.masahirosaito.chatwork4j.data.Room
+import com.masahirosaito.chatwork4j.data.contacts.Contact
 import com.masahirosaito.chatwork4j.data.my.Status
 import com.masahirosaito.chatwork4j.data.my.Task
 import okhttp3.OkHttpClient
@@ -40,6 +41,11 @@ class ChatWork4j(val TOKEN: String) {
     fun getMyTasks() : Array<Task> = Gson().fromJson(
             getJsonFromResponse("/my/tasks"),
             Array<Task>::class.java
+    )
+
+    fun getContacts() : Array<Contact> = Gson().fromJson(
+            getJsonFromResponse("/contacts"),
+            Array<Contact>::class.java
     )
 
     fun getRooms() : Array<Room> = Gson().fromJson(
