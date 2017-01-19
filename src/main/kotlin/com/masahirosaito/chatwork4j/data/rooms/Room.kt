@@ -2,6 +2,7 @@ package com.masahirosaito.chatwork4j.data.rooms
 
 import com.google.gson.Gson
 import com.masahirosaito.chatwork4j.ChatWork4j.Companion.getJsonFromResponse
+import com.masahirosaito.chatwork4j.ChatWork4j.Companion.getObjectFromGson
 import com.masahirosaito.chatwork4j.data.my.Task
 
 /**
@@ -38,15 +39,31 @@ data class Room(
             Message::class.java
     )
 
-    fun getTasks() : Array<Task> = Gson().fromJson(
-            getJsonFromResponse("/rooms/${this.room_id}/tasks"),
-            Array<Task>::class.java
-    )
-
     fun getTask(taskId: Int) : Task = Gson().fromJson(
             getJsonFromResponse("/rooms/${this.room_id}/tasks/$taskId"),
             Task::class.java
     )
+
+    fun getTasks(account_id: Int? = null,
+                assigned_by_account_id: Int? = null,
+                status: Task.Status? = null) : Array<Task>? {
+
+        val url = buildString { append("/rooms/$room_id/tasks")
+            if (account_id != null || assigned_by_account_id != null || status != null) { append("?")
+                if (account_id != null) append("account_id=$account_id")
+                if (assigned_by_account_id != null) {
+                    if (!endsWith("?")) append("&")
+                    append("assigned_by_account_id=$assigned_by_account_id")
+                }
+                if (status != null) {
+                    if (!endsWith("?")) append("&")
+                    append("status=${status.name.toLowerCase()}")
+                }
+            }
+        }
+
+        return getObjectFromGson(url, Array<Task>::class.java)
+    }
 
     fun getFiles() : Array<File> = Gson().fromJson(
             getJsonFromResponse("/rooms/${this.room_id}/files"),

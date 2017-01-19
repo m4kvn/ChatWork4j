@@ -11,4 +11,6 @@ data class Task(
         val body: String,
         val limit_time: Long,
         val status: String
-)
+) {
+    enum class Status { OPEN, DONE }
+}
