@@ -53,6 +53,11 @@ data class Room(
             Array<File>::class.java
     )
 
+    fun getFiles(accountId: Int) : Array<File> = Gson().fromJson(
+            getJsonFromResponse("/rooms/$room_id/files?account_id=$accountId"),
+            Array<File>::class.java
+    )
+
     fun getFile(fileId: Int) : File = Gson().fromJson(
             getJsonFromResponse("/rooms/${this.room_id}/files/$fileId"),
             File::class.java
