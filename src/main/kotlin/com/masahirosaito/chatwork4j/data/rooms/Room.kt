@@ -69,9 +69,11 @@ data class Room(
             Array<File>::class.java
     )
 
-    fun getFile(fileId: Int, createDownloadUrl: Boolean) : File {
-        var url = "/rooms/$room_id/files/$fileId"
-        if (createDownloadUrl) url += "?create_download_url=1"
-        return Gson().fromJson(getJsonFromResponse(url), File::class.java)
+    fun getFile(fileId: Int, createDownloadUrl: Boolean) : File? {
+        val url = buildString {
+            append("/rooms/$room_id/files/$fileId")
+            if (createDownloadUrl) append("?create_download_url=1")
+        }
+        return getObjectFromGson(url, File::class.java)
     }
 }
