@@ -59,11 +59,6 @@ data class Room(
         return getObjectFromGson(url, Array<Task>::class.java)
     }
 
-    fun getFiles() : Array<File> = Gson().fromJson(
-            getJsonFromResponse("/rooms/${this.room_id}/files"),
-            Array<File>::class.java
-    )
-
     fun getFiles(accountId: Int? = null) : Array<File>? {
         val url = buildString {
             append("/rooms/$room_id/files")
