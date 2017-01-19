@@ -2,6 +2,7 @@ package com.masahirosaito.chatwork4j
 
 import com.google.gson.Gson
 import com.masahirosaito.chatwork4j.data.Me
+import com.masahirosaito.chatwork4j.data.Message
 import com.masahirosaito.chatwork4j.data.Room
 import com.masahirosaito.chatwork4j.data.Status
 import okhttp3.OkHttpClient
@@ -38,5 +39,10 @@ class ChatWork4j(val TOKEN: String) {
     fun getRooms() : Array<Room> = Gson().fromJson(
             getJsonFromResponse("/rooms"),
             Array<Room>::class.java
+    )
+
+    fun getMessages(roomId: Int, force: Int) : Array<Message> = Gson().fromJson(
+            getJsonFromResponse("/rooms/$roomId/messages?force=$force"),
+            Array<Message>::class.java
     )
 }
