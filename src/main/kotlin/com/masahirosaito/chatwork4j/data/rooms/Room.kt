@@ -64,10 +64,13 @@ data class Room(
             Array<File>::class.java
     )
 
-    fun getFiles(accountId: Int) : Array<File> = Gson().fromJson(
-            getJsonFromResponse("/rooms/$room_id/files?account_id=$accountId"),
-            Array<File>::class.java
-    )
+    fun getFiles(accountId: Int? = null) : Array<File>? {
+        val url = buildString {
+            append("/rooms/$room_id/files")
+            if (accountId != null) append("?account_id=$accountId")
+        }
+        return getObjectFromGson(url, Array<File>::class.java)
+    }
 
     fun getFile(fileId: Int, createDownloadUrl: Boolean = false) : File? {
         val url = buildString {
