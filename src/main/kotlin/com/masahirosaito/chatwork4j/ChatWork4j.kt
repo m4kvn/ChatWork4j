@@ -29,6 +29,12 @@ class ChatWork4j(val TOKEN: String) {
             val response = client.newCall(request).execute()
             return response.body().string()
         }
+
+        fun <T> getObjectFromGson(url: String, clazz: Class<T>) : T? {
+            val json = getJsonFromResponse(url)
+            if (json.isNullOrBlank()) return null
+            else return Gson().fromJson(json, clazz)
+        }
     }
 
     init {
