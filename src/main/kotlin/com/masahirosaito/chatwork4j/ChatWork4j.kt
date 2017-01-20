@@ -54,6 +54,16 @@ class ChatWork4j(val TOKEN: String) {
             val response = client.newCall(request).execute()
             return response.body().string()
         }
+
+        fun delete(url: String, body: RequestBody): String {
+            val request = Request.Builder()
+                    .url(CHATWORK_API_URL_ROOT + url)
+                    .addHeader(CHATWORK_API_TOKEN_HEADER, CHATWORK_API_TOKEN)
+                    .delete(body)
+                    .build()
+            val response = client.newCall(request).execute()
+            return response.body().string()
+        }
     }
 
     init {
@@ -127,7 +137,7 @@ class ChatWork4j(val TOKEN: String) {
     fun putRoom(room_id: Int,
                 description: String? = null,
                 icon_preset: IconPreset? = null,
-                name: String? = null) : String {
+                name: String? = null): String {
 
         val body = FormBody.Builder().apply {
 
@@ -136,12 +146,22 @@ class ChatWork4j(val TOKEN: String) {
             if (icon_preset != null) add("icon_preset", icon_preset.name)
 
             if (name != null) add("name", name)
+
         }.build()
 
-        return  put("/rooms/$room_id", body)
+        return put("/rooms/$room_id", body)
+    }
+
+    fun deleteRoom(room_id: Int, action_type: ActionType): String {
+        val body = FormBody.Builder()
+                .add("action_type", action_type.name)
+                .build()
+        return delete("/rooms/$room_id", body)
     }
 
     enum class IconPreset { group, check, document, meeting, event, project, business,
         study, security, star, idea, heart, magcup, beer, music, sports, travel
     }
+
+    enum class ActionType { leave, delete }
 }
