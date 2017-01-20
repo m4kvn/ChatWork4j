@@ -159,8 +159,9 @@ class ChatWork4j(val TOKEN: String) {
         return delete("/rooms/$room_id", body)
     }
 
-    enum class IconPreset { group, check, document, meeting, event, project, business,
-        study, security, star, idea, heart, magcup, beer, music, sports, travel
+    enum class IconPreset {
+        group, check, document, meeting, event, project, business, study,
+        security, star, idea, heart, magcup, beer, music, sports, travel
     }
 
     enum class ActionType { leave, delete }
