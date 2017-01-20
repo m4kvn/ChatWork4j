@@ -44,6 +44,16 @@ class ChatWork4j(val TOKEN: String) {
             val response = client.newCall(request).execute()
             return response.body().string()
         }
+
+        fun put(url: String, body: RequestBody): String {
+            val request = Request.Builder()
+                    .url(CHATWORK_API_URL_ROOT + url)
+                    .addHeader(CHATWORK_API_TOKEN_HEADER, CHATWORK_API_TOKEN)
+                    .put(body)
+                    .build()
+            val response = client.newCall(request).execute()
+            return response.body().string()
+        }
     }
 
     init {
@@ -112,6 +122,23 @@ class ChatWork4j(val TOKEN: String) {
         }.build()
 
         return post("/rooms", body)
+    }
+
+    fun putRoom(room_id: Int,
+                description: String? = null,
+                icon_preset: IconPreset? = null,
+                name: String? = null) : String {
+
+        val body = FormBody.Builder().apply {
+
+            if (description != null) add("description", description)
+
+            if (icon_preset != null) add("icon_preset", icon_preset.name)
+
+            if (name != null) add("name", name)
+        }.build()
+
+        return  put("/rooms/$room_id", body)
     }
 
     enum class IconPreset { group, check, document, meeting, event, project, business,
