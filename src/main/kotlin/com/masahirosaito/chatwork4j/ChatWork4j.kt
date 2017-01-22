@@ -70,35 +70,17 @@ class ChatWork4j(val TOKEN: String) {
         CHATWORK_API_TOKEN = TOKEN
     }
 
-    fun getMe(): Me = Gson().fromJson(
-            getJsonFromResponse("/me"),
-            Me::class.java
-    )
+    fun getMe(): Me? = getObjectFromGson(url = "/me", clazz = Me::class.java)
 
-    fun getMyStatus(): Status = Gson().fromJson(
-            getJsonFromResponse("/my/status"),
-            Status::class.java
-    )
+    fun getMyStatus(): Status? = getObjectFromGson(url = "/my/status", clazz = Status::class.java)
 
-    fun getMyTasks(): Array<Task> = Gson().fromJson(
-            getJsonFromResponse("/my/tasks"),
-            Array<Task>::class.java
-    )
+    fun getMyTasks(): Array<Task>? = getObjectFromGson(url = "/my/tasks", clazz = Array<Task>::class.java)
 
-    fun getContacts(): Array<Contact> = Gson().fromJson(
-            getJsonFromResponse("/contacts"),
-            Array<Contact>::class.java
-    )
+    fun getContacts(): Array<Contact>? = getObjectFromGson(url = "/contacts", clazz = Array<Contact>::class.java)
 
-    fun getRooms(): Array<Room> = Gson().fromJson(
-            getJsonFromResponse("/rooms"),
-            Array<Room>::class.java
-    )
+    fun getRooms(): Array<Room>? = getObjectFromGson(url = "/rooms", clazz = Array<Room>::class.java)
 
-    fun getRoom(roomId: Int): Room = Gson().fromJson(
-            getJsonFromResponse("/rooms/$roomId"),
-            Room::class.java
-    )
+    fun getRoom(room_id: Int): Room? = getObjectFromGson(url = "/rooms/$room_id", clazz = Room::class.java)
 
     fun postRoom(description: String? = null,
                  icon_preset: IconPreset? = null,
