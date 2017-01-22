@@ -70,18 +70,60 @@ class ChatWork4j(val TOKEN: String) {
         CHATWORK_API_TOKEN = TOKEN
     }
 
+    /**
+     * 自分の情報を取得
+     *
+     * @return 自分の情報
+     */
     fun getMe(): Me? = getObjectFromGson(url = "/me", clazz = Me::class.java)
 
+    /**
+     * 自分のデータを取得
+     *
+     * @return 自分のデータ
+     */
     fun getMyStatus(): Status? = getObjectFromGson(url = "/my/status", clazz = Status::class.java)
 
+    /**
+     * 自分のタスク一覧を取得
+     *
+     * @return 自分のタスク一覧
+     */
     fun getMyTasks(): Array<Task>? = getObjectFromGson(url = "/my/tasks", clazz = Array<Task>::class.java)
 
+    /**
+     * 自分のコンタクト一覧を取得
+     *
+     * @return 自分のコンタクト一覧
+     */
     fun getContacts(): Array<Contact>? = getObjectFromGson(url = "/contacts", clazz = Array<Contact>::class.java)
 
+    /**
+     * 自分のチャットルーム一覧を取得
+     *
+     * @return 自分のチャット一覧
+     */
     fun getRooms(): Array<Room>? = getObjectFromGson(url = "/rooms", clazz = Array<Room>::class.java)
 
+    /**
+     * 指定したチャットルーム情報を取得
+     *
+     * @param room_id チャットのルームID
+     * @return チャットルーム
+     */
     fun getRoom(room_id: Int): Room? = getObjectFromGson(url = "/rooms/$room_id", clazz = Room::class.java)
 
+    /**
+     * グループチャットを新規作成
+     *
+     * @param description グループチャットの概要説明テキスト
+     * @param icon_preset グループチャットのアイコン種類
+     * @param members_admin_ids 管理者権限のユーザー(必須)
+     * @param members_member_ids メンバー権限のユーザー
+     * @param members_readonly_ids 閲覧のみ権限のユーザー
+     * @param name グループチャット名
+     * @return レスポンスのJSON文字列
+     */
     fun postRoom(description: String? = null,
                  icon_preset: IconPreset? = null,
                  members_admin_ids: Array<Int>,
@@ -116,6 +158,15 @@ class ChatWork4j(val TOKEN: String) {
         return post("/rooms", body)
     }
 
+    /**
+     * チャットルームの情報を更新
+     *
+     * @param room_id グループチャットのルームID
+     * @param description グループチャットの概要説明テキスト
+     * @param icon_preset グループチャットのアイコン種類
+     * @param name グループチャット名
+     * @return レスポンスのJSON文字列
+     */
     fun putRoom(room_id: Int,
                 description: String? = null,
                 icon_preset: IconPreset? = null,
@@ -134,6 +185,13 @@ class ChatWork4j(val TOKEN: String) {
         return put("/rooms/$room_id", body)
     }
 
+    /**
+     * チャットルームの削除/退席
+     *
+     * @param room_id グループチャットのルームID
+     * @param action_type 削除か退席の種類
+     * @return レスポンスのJSON文字列
+     */
     fun deleteRoom(room_id: Int, action_type: ActionType): String {
         val body = FormBody.Builder()
                 .add("action_type", action_type.name)
@@ -141,10 +199,16 @@ class ChatWork4j(val TOKEN: String) {
         return delete("/rooms/$room_id", body)
     }
 
+    /**
+     * チャットルームのアイコンの種類
+     */
     enum class IconPreset {
         group, check, document, meeting, event, project, business, study,
         security, star, idea, heart, magcup, beer, music, sports, travel
     }
 
+    /**
+     * チャットルームのアクションタイプ
+     */
     enum class ActionType { leave, delete }
 }
