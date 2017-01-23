@@ -20,7 +20,7 @@ class ChatWork4j(val TOKEN: String) {
 
         val client = OkHttpClient()
 
-        fun getJsonFromResponse(url: String): String {
+        fun get(url: String): String {
             val request = Request.Builder()
                     .url(CHATWORK_API_URL_ROOT + url)
                     .addHeader(CHATWORK_API_TOKEN_HEADER, CHATWORK_API_TOKEN)
@@ -30,7 +30,7 @@ class ChatWork4j(val TOKEN: String) {
         }
 
         fun <T> getObjectFromGson(url: String, clazz: Class<T>): T? {
-            val json = getJsonFromResponse(url)
+            val json = get(url)
             if (json.isNullOrBlank()) return null
             else return Gson().fromJson(json, clazz)
         }
