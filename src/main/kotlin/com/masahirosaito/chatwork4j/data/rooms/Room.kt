@@ -5,6 +5,7 @@ import com.masahirosaito.chatwork4j.ChatWork4j.Companion.get
 import com.masahirosaito.chatwork4j.ChatWork4j.Companion.newObjectFromJson
 import com.masahirosaito.chatwork4j.ChatWork4j.Companion.post
 import com.masahirosaito.chatwork4j.ChatWork4j.Companion.put
+import com.masahirosaito.chatwork4j.data.MemberResponse
 import com.masahirosaito.chatwork4j.data.my.Task
 import okhttp3.FormBody
 
@@ -64,7 +65,7 @@ data class Room(
      */
     fun putMembers(members_admin_ids: Array<Int>,
                    members_member_ids: Array<Int>? = null,
-                   members_readonly_ids: Array<Int>? = null): String {
+                   members_readonly_ids: Array<Int>? = null): MemberResponse? {
 
         val body = FormBody.Builder().apply {
 
@@ -81,7 +82,7 @@ data class Room(
             }.replaceFirst(",", ""))
         }.build()
 
-        return put(url = "/rooms/$room_id/members", body = body)
+        return newObjectFromJson(put("/rooms/$room_id/members", body), MemberResponse::class.java)
     }
 
     /**
