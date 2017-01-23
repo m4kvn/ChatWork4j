@@ -1,5 +1,6 @@
 package com.masahirosaito.chatwork4j.data.rooms
 
+import com.masahirosaito.chatwork4j.ChatWork4j
 import com.masahirosaito.chatwork4j.ChatWork4j.Companion.getObjectFromGson
 import com.masahirosaito.chatwork4j.ChatWork4j.Companion.post
 import com.masahirosaito.chatwork4j.ChatWork4j.Companion.put
@@ -25,6 +26,25 @@ data class Room(
         val last_update_time: Long,
         val description: String
 ) {
+
+    /**
+     * チャットルームのアクションタイプ
+     */
+    enum class ActionType { leave, delete }
+
+    /**
+     * チャットルームの削除/退席
+     *
+     * @param action_type 削除か退席の種類
+     * @return レスポンスのJSON文字列
+     */
+    fun deleteRoom(action_type: ActionType): String {
+        val body = FormBody.Builder()
+                .add("action_type", action_type.name)
+                .build()
+        return ChatWork4j.delete("/rooms/$room_id", body)
+    }
+
     fun getMembers(): Array<Member>? = getObjectFromGson("/rooms/$room_id/members", Array<Member>::class.java)
 
     fun putMembers(members_admin_ids: Array<Int>,

@@ -186,29 +186,10 @@ class ChatWork4j(val TOKEN: String) {
     }
 
     /**
-     * チャットルームの削除/退席
-     *
-     * @param room_id グループチャットのルームID
-     * @param action_type 削除か退席の種類
-     * @return レスポンスのJSON文字列
-     */
-    fun deleteRoom(room_id: Int, action_type: ActionType): String {
-        val body = FormBody.Builder()
-                .add("action_type", action_type.name)
-                .build()
-        return delete("/rooms/$room_id", body)
-    }
-
-    /**
      * チャットルームのアイコンの種類
      */
     enum class IconPreset {
         group, check, document, meeting, event, project, business, study,
         security, star, idea, heart, magcup, beer, music, sports, travel
     }
-
-    /**
-     * チャットルームのアクションタイプ
-     */
-    enum class ActionType { leave, delete }
 }
