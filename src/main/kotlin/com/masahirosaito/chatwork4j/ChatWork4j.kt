@@ -1,6 +1,7 @@
 package com.masahirosaito.chatwork4j
 
 import com.google.gson.Gson
+import com.masahirosaito.chatwork4j.data.PostRoomResponse
 import com.masahirosaito.chatwork4j.data.me.Me
 import com.masahirosaito.chatwork4j.data.rooms.Room
 import com.masahirosaito.chatwork4j.data.contacts.Contact
@@ -162,7 +163,7 @@ class ChatWork4j(val TOKEN: String) {
                  members_admin_ids: Array<Int>,
                  members_member_ids: Array<Int>? = null,
                  members_readonly_ids: Array<Int>? = null,
-                 name: String): String {
+                 name: String): PostRoomResponse? {
 
         val body = FormBody.Builder().apply {
 
@@ -188,7 +189,7 @@ class ChatWork4j(val TOKEN: String) {
 
         }.build()
 
-        return post("/rooms", body)
+        return newObjectFromJson(post("/rooms", body), PostRoomResponse::class.java)
     }
 
     /**
