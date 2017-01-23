@@ -35,6 +35,13 @@ class ChatWork4j(val TOKEN: String) {
             else return Gson().fromJson(json, clazz)
         }
 
+        /**
+         *　POSTリクエスト送信
+         *
+         * @param url URL
+         * @param body RequestBody
+         * @return レスポンスのJSON文字列
+         */
         fun post(url: String, body: RequestBody): String {
             val request = Request.Builder()
                     .url(CHATWORK_API_URL_ROOT + url)
@@ -45,6 +52,13 @@ class ChatWork4j(val TOKEN: String) {
             return response.body().string()
         }
 
+        /**
+         * PUTリクエスト送信
+         *
+         * @param url URL
+         * @param body RequestBody
+         * @return レスポンスのJSON文字列
+         */
         fun put(url: String, body: RequestBody): String {
             val request = Request.Builder()
                     .url(CHATWORK_API_URL_ROOT + url)
@@ -55,6 +69,13 @@ class ChatWork4j(val TOKEN: String) {
             return response.body().string()
         }
 
+        /**
+         * DELETEリクエスト送信
+         *
+         * @param url URL
+         * @param body RequestBody
+         * @return レスポンスのJSON文字列
+         */
         fun delete(url: String, body: RequestBody): String {
             val request = Request.Builder()
                     .url(CHATWORK_API_URL_ROOT + url)
