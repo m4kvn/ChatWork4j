@@ -46,7 +46,7 @@ class ChatWork4j(val TOKEN: String) {
          * @param clazz 生成するオブジェクトのクラス
          * @return 生成したオブジェクト
          */
-        fun <T> getObjectFromJson(json: String, clazz: Class<T>): T? {
+        fun <T> newObjectFromJson(json: String, clazz: Class<T>): T? {
             if (json.isNullOrBlank()) return null
             else return Gson().fromJson(json, clazz)
         }
@@ -108,35 +108,35 @@ class ChatWork4j(val TOKEN: String) {
      *
      * @return 自分の情報
      */
-    fun getMe(): Me? = getObjectFromJson(get("/me"), Me::class.java)
+    fun getMe(): Me? = newObjectFromJson(get("/me"), Me::class.java)
 
     /**
      * 自分のデータを取得
      *
      * @return 自分のデータ
      */
-    fun getMyStatus(): Status? = getObjectFromJson(get("/my/status"), Status::class.java)
+    fun getMyStatus(): Status? = newObjectFromJson(get("/my/status"), Status::class.java)
 
     /**
      * 自分のタスク一覧を取得
      *
      * @return 自分のタスク一覧
      */
-    fun getMyTasks(): Array<Task>? = getObjectFromJson(get("/my/tasks"), Array<Task>::class.java)
+    fun getMyTasks(): Array<Task>? = newObjectFromJson(get("/my/tasks"), Array<Task>::class.java)
 
     /**
      * 自分のコンタクト一覧を取得
      *
      * @return 自分のコンタクト一覧
      */
-    fun getContacts(): Array<Contact>? = getObjectFromJson(get("/contacts"), Array<Contact>::class.java)
+    fun getContacts(): Array<Contact>? = newObjectFromJson(get("/contacts"), Array<Contact>::class.java)
 
     /**
      * 自分のチャットルーム一覧を取得
      *
      * @return 自分のチャット一覧
      */
-    fun getRooms(): Array<Room>? = getObjectFromJson(get("/rooms"), Array<Room>::class.java)
+    fun getRooms(): Array<Room>? = newObjectFromJson(get("/rooms"), Array<Room>::class.java)
 
     /**
      * 指定したチャットルーム情報を取得
@@ -144,7 +144,7 @@ class ChatWork4j(val TOKEN: String) {
      * @param room_id チャットのルームID
      * @return チャットルーム
      */
-    fun getRoom(room_id: Int): Room? = getObjectFromJson(get("/rooms/$room_id"), Room::class.java)
+    fun getRoom(room_id: Int): Room? = newObjectFromJson(get("/rooms/$room_id"), Room::class.java)
 
     /**
      * グループチャットを新規作成

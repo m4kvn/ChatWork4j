@@ -2,7 +2,7 @@ package com.masahirosaito.chatwork4j.data.rooms
 
 import com.masahirosaito.chatwork4j.ChatWork4j
 import com.masahirosaito.chatwork4j.ChatWork4j.Companion.get
-import com.masahirosaito.chatwork4j.ChatWork4j.Companion.getObjectFromJson
+import com.masahirosaito.chatwork4j.ChatWork4j.Companion.newObjectFromJson
 import com.masahirosaito.chatwork4j.ChatWork4j.Companion.post
 import com.masahirosaito.chatwork4j.ChatWork4j.Companion.put
 import com.masahirosaito.chatwork4j.data.my.Task
@@ -50,7 +50,7 @@ data class Room(
      * チャットルームのメンバー一覧を取得
      * @return チャットルームのメンバー一覧
      */
-    fun getMembers(): Array<Member>? = getObjectFromJson(
+    fun getMembers(): Array<Member>? = newObjectFromJson(
             get("/rooms/$room_id/members"), Array<Member>::class.java
     )
 
@@ -95,7 +95,7 @@ data class Room(
             append("/rooms/$room_id/messages?force=")
             if (force) append("1") else append("0")
         }
-        return getObjectFromJson(get(url), Array<Message>::class.java)
+        return newObjectFromJson(get(url), Array<Message>::class.java)
     }
 
     /**
@@ -115,7 +115,7 @@ data class Room(
      * @param messageId メッセージID
      * @return 取得したメッセージ
      */
-    fun getMessage(messageId: Int): Message? = getObjectFromJson(
+    fun getMessage(messageId: Int): Message? = newObjectFromJson(
             get("/rooms/$room_id/messages/$messageId"), Message::class.java
     )
 
@@ -125,7 +125,7 @@ data class Room(
      * @param taskId タスクID
      * @return タスク
      */
-    fun getTask(taskId: Int): Task? = getObjectFromJson(
+    fun getTask(taskId: Int): Task? = newObjectFromJson(
             get("/rooms/$room_id/tasks/$taskId"), Task::class.java
     )
 
@@ -151,7 +151,7 @@ data class Room(
             }
         }
 
-        return getObjectFromJson(get(url), Array<Task>::class.java)
+        return newObjectFromJson(get(url), Array<Task>::class.java)
     }
 
     /**
@@ -165,7 +165,7 @@ data class Room(
             append("/rooms/$room_id/files")
             if (accountId != null) append("?account_id=$accountId")
         }
-        return getObjectFromJson(get(url), Array<File>::class.java)
+        return newObjectFromJson(get(url), Array<File>::class.java)
     }
 
     /**
@@ -179,6 +179,6 @@ data class Room(
             append("/rooms/$room_id/files/$fileId")
             if (createDownloadUrl) append("?create_download_url=1")
         }
-        return getObjectFromJson(get(url), File::class.java)
+        return newObjectFromJson(get(url), File::class.java)
     }
 }
