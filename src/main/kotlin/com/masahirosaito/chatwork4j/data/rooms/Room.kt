@@ -45,8 +45,20 @@ data class Room(
         return ChatWork4j.delete("/rooms/$room_id", body)
     }
 
+    /**
+     * チャットルームのメンバー一覧を取得
+     * @return チャットルームのメンバー一覧
+     */
     fun getMembers(): Array<Member>? = getObjectFromGson("/rooms/$room_id/members", Array<Member>::class.java)
 
+    /**
+     * チャットルームのメンバーを更新
+     *
+     * @param members_admin_ids 管理者権限のユーザー(必須)
+     * @param members_member_ids メンバー権限のユーザー
+     * @param members_readonly_ids 閲覧のみ権限のユーザー
+     * @return レスポンスのJSON文字列
+     */
     fun putMembers(members_admin_ids: Array<Int>,
                    members_member_ids: Array<Int>? = null,
                    members_readonly_ids: Array<Int>? = null): String {
@@ -69,6 +81,12 @@ data class Room(
         return put(url = "/rooms/$room_id/members", body = body)
     }
 
+    /**
+     * チャットルームのメッセージ100件を取得
+     *
+     * @param force falseで未取得メッセージのみ取得
+     * @return 取得したメッセージ一覧
+     */
     fun getMessages(force: Boolean = false): Array<Message>? {
         val url = buildString {
             append("/rooms/$room_id/messages?force=")
@@ -77,16 +95,42 @@ data class Room(
         return getObjectFromGson(url, Array<Message>::class.java)
     }
 
+    /**
+     * チャットルームにメッセージを送信
+     *
+     * @param message 送信するメッセージ
+     * @return レスポンスのJSON文字列
+     */
     fun postMessage(message: String): String = post(
             "/rooms/$room_id/messages",
             FormBody.Builder().add("body", message).build()
     )
 
+    /**
+     * チャットルームのメッセージを取得
+     *
+     * @param messageId メッセージID
+     * @return 取得したメッセージ
+     */
     fun getMessage(messageId: Int): Message? =
             getObjectFromGson("/rooms/$room_id/messages/$messageId", Message::class.java)
 
+    /**
+     * チャットルームのタスクを取得
+     *
+     * @param taskId タスクID
+     * @return タスク
+     */
     fun getTask(taskId: Int): Task? = getObjectFromGson("/rooms/$room_id/tasks/$taskId", Task::class.java)
 
+    /**
+     * チャットルームのタスク一覧を取得
+     *
+     * @param account_id タスクを受け取ったアカウントID
+     * @param assigned_by_account_id タスクを作成したアカウントID
+     * @param status タスクの状態
+     * @return タスク一覧
+     */
     fun getTasks(account_id: Int? = null,
                  assigned_by_account_id: Int? = null,
                  status: Task.Status? = null): Array<Task>? {
@@ -104,6 +148,12 @@ data class Room(
         return getObjectFromGson(url, Array<Task>::class.java)
     }
 
+    /**
+     * チャットルームのファイル一覧を取得
+     *
+     * @param accountId ファイルをアップロードしたアカウントID
+     * @return ファイル一覧
+     */
     fun getFiles(accountId: Int? = null): Array<File>? {
         val url = buildString {
             append("/rooms/$room_id/files")
@@ -112,6 +162,12 @@ data class Room(
         return getObjectFromGson(url, Array<File>::class.java)
     }
 
+    /**
+     * チャットルームのファイルを取得
+     *
+     * @param fileId ファイルID
+     * @param createDownloadUrl trueでダウンロードURLを作成
+     */
     fun getFile(fileId: Int, createDownloadUrl: Boolean = false): File? {
         val url = buildString {
             append("/rooms/$room_id/files/$fileId")
