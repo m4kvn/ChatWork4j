@@ -39,6 +39,13 @@ class ChatWork4j(val TOKEN: String) {
             return response.body().string()
         }
 
+        /**
+         * Json文字列からオブジェクトを生成
+         *
+         * @param json Json文字列
+         * @param clazz 生成するオブジェクトのクラス
+         * @return 生成したオブジェクト
+         */
         fun <T> getObjectFromJson(json: String, clazz: Class<T>): T? {
             if (json.isNullOrBlank()) return null
             else return Gson().fromJson(json, clazz)
