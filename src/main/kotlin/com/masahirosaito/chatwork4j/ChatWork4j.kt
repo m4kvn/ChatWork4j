@@ -20,6 +20,12 @@ class ChatWork4j(val TOKEN: String) {
 
         val client = OkHttpClient()
 
+        /**
+         * GETリクエスト送信
+         *
+         * @param url URL
+         * @return レスポンスのJSON文字列
+         */
         fun get(url: String): String {
             val request = Request.Builder()
                     .url(CHATWORK_API_URL_ROOT + url)
