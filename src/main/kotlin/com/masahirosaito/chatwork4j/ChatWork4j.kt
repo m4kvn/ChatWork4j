@@ -3,10 +3,12 @@ package com.masahirosaito.chatwork4j
 import com.google.gson.Gson
 import com.masahirosaito.chatwork4j.data.RoomResponse
 import com.masahirosaito.chatwork4j.data.me.Me
-import com.masahirosaito.chatwork4j.data.rooms.Room
 import com.masahirosaito.chatwork4j.data.contacts.Contact
 import com.masahirosaito.chatwork4j.data.my.Status
 import com.masahirosaito.chatwork4j.data.my.Task
+import com.masahirosaito.chatwork4j.data.rooms.Room
+import com.masahirosaito.chatwork4j.error.ResponseErrorsException
+import com.masahirosaito.chatwork4j.error.NullOrBlankResponseException
 import okhttp3.*
 
 /**
@@ -38,18 +40,6 @@ class ChatWork4j(val TOKEN: String) {
                     .build()
             val response = client.newCall(request).execute()
             return response.body().string()
-        }
-
-        /**
-         * Json文字列からオブジェクトを生成
-         *
-         * @param json Json文字列
-         * @param clazz 生成するオブジェクトのクラス
-         * @return 生成したオブジェクト
-         */
-        fun <T> newObjectFromJson(json: String, clazz: Class<T>): T? {
-            if (json.isNullOrBlank()) return null
-            else return Gson().fromJson(json, clazz)
         }
 
         /**
@@ -102,6 +92,19 @@ class ChatWork4j(val TOKEN: String) {
             val response = client.newCall(request).execute()
             return response.body().string()
         }
+
+        /**
+         * Json文字列からオブジェクトを生成
+         *
+         * @param json Json文字列
+         * @param clazz 生成するオブジェクトのクラス
+         * @return 生成したオブジェクト
+         */
+        fun <T> newObjectFromJson(json: String, clazz: Class<T>): T {
+            if (json.contains("errors")) throw ResponseErrorsException(json)
+            if (json.isNullOrBlank()) throw NullOrBlankResponseException()
+            else return Gson().fromJson(json, clazz)
+        }
     }
 
     /**
@@ -109,35 +112,35 @@ class ChatWork4j(val TOKEN: String) {
      *
      * @return 自分の情報
      */
-    fun getMe(): Me? = newObjectFromJson(get("/me"), Me::class.java)
+    fun getMe(): Me = newObjectFromJson(get("/me"), Me::class.java)
 
     /**
      * 自分のデータを取得
      *
      * @return 自分のデータ
      */
-    fun getMyStatus(): Status? = newObjectFromJson(get("/my/status"), Status::class.java)
+    fun getMyStatus(): Status = newObjectFromJson(get("/my/status"), Status::class.java)
 
     /**
      * 自分のタスク一覧を取得
      *
      * @return 自分のタスク一覧
      */
-    fun getMyTasks(): Array<Task>? = newObjectFromJson(get("/my/tasks"), Array<Task>::class.java)
+    fun getMyTasks(): Array<Task> = newObjectFromJson(get("/my/tasks"), Array<Task>::class.java)
 
     /**
      * 自分のコンタクト一覧を取得
      *
      * @return 自分のコンタクト一覧
      */
-    fun getContacts(): Array<Contact>? = newObjectFromJson(get("/contacts"), Array<Contact>::class.java)
+    fun getContacts(): Array<Contact> = newObjectFromJson(get("/contacts"), Array<Contact>::class.java)
 
     /**
      * 自分のチャットルーム一覧を取得
      *
      * @return 自分のチャット一覧
      */
-    fun getRooms(): Array<Room>? = newObjectFromJson(get("/rooms"), Array<Room>::class.java)
+    fun getRooms(): Array<Room> = newObjectFromJson(get("/rooms"), Array<Room>::class.java)
 
     /**
      * 指定したチャットルーム情報を取得
@@ -145,7 +148,7 @@ class ChatWork4j(val TOKEN: String) {
      * @param room_id チャットのルームID
      * @return チャットルーム
      */
-    fun getRoom(room_id: Int): Room? = newObjectFromJson(get("/rooms/$room_id"), Room::class.java)
+    fun getRoom(room_id: Int): Room = newObjectFromJson(get("/rooms/$room_id"), Room::class.java)
 
     /**
      * グループチャットを新規作成
@@ -158,12 +161,12 @@ class ChatWork4j(val TOKEN: String) {
      * @param name グループチャット名
      * @return レスポンスのJSON文字列
      */
-    fun postRoom(description: String? = null,
-                 icon_preset: IconPreset? = null,
+    fun postRoom(name: String,
                  members_admin_ids: Array<Int>,
                  members_member_ids: Array<Int>? = null,
                  members_readonly_ids: Array<Int>? = null,
-                 name: String): RoomResponse? {
+                 description: String? = null,
+                 icon_preset: IconPreset? = null): RoomResponse {
 
         val body = FormBody.Builder().apply {
 
@@ -204,7 +207,7 @@ class ChatWork4j(val TOKEN: String) {
     fun putRoom(room_id: Int,
                 description: String? = null,
                 icon_preset: IconPreset? = null,
-                name: String? = null): RoomResponse? {
+                name: String? = null): RoomResponse {
 
         val body = FormBody.Builder().apply {
 

@@ -51,7 +51,7 @@ data class Room(
      * チャットルームのメンバー一覧を取得
      * @return チャットルームのメンバー一覧
      */
-    fun getMembers(): Array<Member>? = newObjectFromJson(
+    fun getMembers(): Array<Member> = newObjectFromJson(
             get("/rooms/$room_id/members"), Array<Member>::class.java
     )
 
@@ -65,7 +65,7 @@ data class Room(
      */
     fun putMembers(members_admin_ids: Array<Int>,
                    members_member_ids: Array<Int>? = null,
-                   members_readonly_ids: Array<Int>? = null): MemberResponse? {
+                   members_readonly_ids: Array<Int>? = null): MemberResponse {
 
         val body = FormBody.Builder().apply {
 
@@ -91,7 +91,7 @@ data class Room(
      * @param force falseで未取得メッセージのみ取得
      * @return 取得したメッセージ一覧
      */
-    fun getMessages(force: Boolean = false): Array<Message>? {
+    fun getMessages(force: Boolean = false): Array<Message> {
         val url = buildString {
             append("/rooms/$room_id/messages?force=")
             if (force) append("1") else append("0")
@@ -116,7 +116,7 @@ data class Room(
      * @param messageId メッセージID
      * @return 取得したメッセージ
      */
-    fun getMessage(messageId: Int): Message? = newObjectFromJson(
+    fun getMessage(messageId: Int): Message = newObjectFromJson(
             get("/rooms/$room_id/messages/$messageId"), Message::class.java
     )
 
@@ -126,7 +126,7 @@ data class Room(
      * @param taskId タスクID
      * @return タスク
      */
-    fun getTask(taskId: Int): Task? = newObjectFromJson(
+    fun getTask(taskId: Int): Task = newObjectFromJson(
             get("/rooms/$room_id/tasks/$taskId"), Task::class.java
     )
 
@@ -140,7 +140,7 @@ data class Room(
      */
     fun getTasks(account_id: Int? = null,
                  assigned_by_account_id: Int? = null,
-                 status: Task.Status? = null): Array<Task>? {
+                 status: Task.Status? = null): Array<Task> {
 
         val url = buildString {
             append("/rooms/$room_id/tasks")
@@ -161,7 +161,7 @@ data class Room(
      * @param accountId ファイルをアップロードしたアカウントID
      * @return ファイル一覧
      */
-    fun getFiles(accountId: Int? = null): Array<File>? {
+    fun getFiles(accountId: Int? = null): Array<File> {
         val url = buildString {
             append("/rooms/$room_id/files")
             if (accountId != null) append("?account_id=$accountId")
@@ -175,7 +175,7 @@ data class Room(
      * @param fileId ファイルID
      * @param createDownloadUrl trueでダウンロードURLを作成
      */
-    fun getFile(fileId: Int, createDownloadUrl: Boolean = false): File? {
+    fun getFile(fileId: Int, createDownloadUrl: Boolean = false): File {
         val url = buildString {
             append("/rooms/$room_id/files/$fileId")
             if (createDownloadUrl) append("?create_download_url=1")
