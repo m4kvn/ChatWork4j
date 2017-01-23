@@ -35,7 +35,7 @@ class ChatWork4j(val TOKEN: String) {
             return response.body().string()
         }
 
-        fun <T> getObjectFromGson(url: String, clazz: Class<T>): T? {
+        fun <T> getObjectFromJson(url: String, clazz: Class<T>): T? {
             val json = get(url)
             if (json.isNullOrBlank()) return null
             else return Gson().fromJson(json, clazz)
@@ -102,35 +102,35 @@ class ChatWork4j(val TOKEN: String) {
      *
      * @return 自分の情報
      */
-    fun getMe(): Me? = getObjectFromGson(url = "/me", clazz = Me::class.java)
+    fun getMe(): Me? = getObjectFromJson(url = "/me", clazz = Me::class.java)
 
     /**
      * 自分のデータを取得
      *
      * @return 自分のデータ
      */
-    fun getMyStatus(): Status? = getObjectFromGson(url = "/my/status", clazz = Status::class.java)
+    fun getMyStatus(): Status? = getObjectFromJson(url = "/my/status", clazz = Status::class.java)
 
     /**
      * 自分のタスク一覧を取得
      *
      * @return 自分のタスク一覧
      */
-    fun getMyTasks(): Array<Task>? = getObjectFromGson(url = "/my/tasks", clazz = Array<Task>::class.java)
+    fun getMyTasks(): Array<Task>? = getObjectFromJson(url = "/my/tasks", clazz = Array<Task>::class.java)
 
     /**
      * 自分のコンタクト一覧を取得
      *
      * @return 自分のコンタクト一覧
      */
-    fun getContacts(): Array<Contact>? = getObjectFromGson(url = "/contacts", clazz = Array<Contact>::class.java)
+    fun getContacts(): Array<Contact>? = getObjectFromJson(url = "/contacts", clazz = Array<Contact>::class.java)
 
     /**
      * 自分のチャットルーム一覧を取得
      *
      * @return 自分のチャット一覧
      */
-    fun getRooms(): Array<Room>? = getObjectFromGson(url = "/rooms", clazz = Array<Room>::class.java)
+    fun getRooms(): Array<Room>? = getObjectFromJson(url = "/rooms", clazz = Array<Room>::class.java)
 
     /**
      * 指定したチャットルーム情報を取得
@@ -138,7 +138,7 @@ class ChatWork4j(val TOKEN: String) {
      * @param room_id チャットのルームID
      * @return チャットルーム
      */
-    fun getRoom(room_id: Int): Room? = getObjectFromGson(url = "/rooms/$room_id", clazz = Room::class.java)
+    fun getRoom(room_id: Int): Room? = getObjectFromJson(url = "/rooms/$room_id", clazz = Room::class.java)
 
     /**
      * グループチャットを新規作成
