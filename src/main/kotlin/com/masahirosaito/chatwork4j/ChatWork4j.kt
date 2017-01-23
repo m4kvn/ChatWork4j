@@ -13,6 +13,10 @@ import okhttp3.*
  */
 class ChatWork4j(val TOKEN: String) {
 
+    init {
+        CHATWORK_API_TOKEN = TOKEN
+    }
+
     companion object {
         val CHATWORK_API_URL_ROOT = "https://api.chatwork.com/v1"
         val CHATWORK_API_TOKEN_HEADER = "X-ChatWorkToken"
@@ -35,8 +39,7 @@ class ChatWork4j(val TOKEN: String) {
             return response.body().string()
         }
 
-        fun <T> getObjectFromJson(url: String, clazz: Class<T>): T? {
-            val json = get(url)
+        fun <T> getObjectFromJson(json: String, clazz: Class<T>): T? {
             if (json.isNullOrBlank()) return null
             else return Gson().fromJson(json, clazz)
         }
@@ -93,44 +96,40 @@ class ChatWork4j(val TOKEN: String) {
         }
     }
 
-    init {
-        CHATWORK_API_TOKEN = TOKEN
-    }
-
     /**
      * 自分の情報を取得
      *
      * @return 自分の情報
      */
-    fun getMe(): Me? = getObjectFromJson(url = "/me", clazz = Me::class.java)
+    fun getMe(): Me? = getObjectFromJson(get("/me"), Me::class.java)
 
     /**
      * 自分のデータを取得
      *
      * @return 自分のデータ
      */
-    fun getMyStatus(): Status? = getObjectFromJson(url = "/my/status", clazz = Status::class.java)
+    fun getMyStatus(): Status? = getObjectFromJson(get("/my/status"), Status::class.java)
 
     /**
      * 自分のタスク一覧を取得
      *
      * @return 自分のタスク一覧
      */
-    fun getMyTasks(): Array<Task>? = getObjectFromJson(url = "/my/tasks", clazz = Array<Task>::class.java)
+    fun getMyTasks(): Array<Task>? = getObjectFromJson(get("/my/tasks"), Array<Task>::class.java)
 
     /**
      * 自分のコンタクト一覧を取得
      *
      * @return 自分のコンタクト一覧
      */
-    fun getContacts(): Array<Contact>? = getObjectFromJson(url = "/contacts", clazz = Array<Contact>::class.java)
+    fun getContacts(): Array<Contact>? = getObjectFromJson(get("/contacts"), Array<Contact>::class.java)
 
     /**
      * 自分のチャットルーム一覧を取得
      *
      * @return 自分のチャット一覧
      */
-    fun getRooms(): Array<Room>? = getObjectFromJson(url = "/rooms", clazz = Array<Room>::class.java)
+    fun getRooms(): Array<Room>? = getObjectFromJson(get("/rooms"), Array<Room>::class.java)
 
     /**
      * 指定したチャットルーム情報を取得
@@ -138,7 +137,7 @@ class ChatWork4j(val TOKEN: String) {
      * @param room_id チャットのルームID
      * @return チャットルーム
      */
-    fun getRoom(room_id: Int): Room? = getObjectFromJson(url = "/rooms/$room_id", clazz = Room::class.java)
+    fun getRoom(room_id: Int): Room? = getObjectFromJson(get("/rooms/$room_id"), Room::class.java)
 
     /**
      * グループチャットを新規作成
