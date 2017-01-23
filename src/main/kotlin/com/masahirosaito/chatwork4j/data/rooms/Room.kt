@@ -39,11 +39,11 @@ data class Room(
      * @param action_type 削除か退席の種類
      * @return レスポンスのJSON文字列
      */
-    fun deleteRoom(action_type: ActionType): String {
+    fun deleteRoom(action_type: ActionType) {
         val body = FormBody.Builder()
                 .add("action_type", action_type.name)
                 .build()
-        return ChatWork4j.delete("/rooms/$room_id", body)
+        ChatWork4j.delete("/rooms/$room_id", body)
     }
 
     /**
