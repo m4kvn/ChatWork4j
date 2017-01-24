@@ -1,7 +1,16 @@
 package com.masahirosaito.chatwork4j.data.contacts
 
 /**
- * Created by masahiro on 2017/01/19.
+ * Contactデータクラス
+ *
+ * @property account_id アカウントID
+ * @property room_id ルームID
+ * @property name 名前
+ * @property chatwork_id チャットワークID
+ * @property organization_id 組織ID
+ * @property organization_name 組織名
+ * @property department 部署
+ * @property avatar_image_url アバター画像URL
  */
 data class Contact(
         val account_id: Int,

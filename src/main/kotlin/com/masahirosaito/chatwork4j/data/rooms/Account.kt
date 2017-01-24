@@ -1,7 +1,11 @@
 package com.masahirosaito.chatwork4j.data.rooms
 
 /**
- * Created by masahiro on 2017/01/19.
+ * Accountデータクラス
+ *
+ * @property account_id アカウントID
+ * @property name 名前
+ * @property avatar_image_url アバター画像URL
  */
 data class Account(
         val account_id: Int,

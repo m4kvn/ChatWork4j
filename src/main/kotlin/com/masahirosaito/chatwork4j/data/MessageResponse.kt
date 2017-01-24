@@ -1,8 +1,8 @@
 package com.masahirosaito.chatwork4j.data
 
 /**
- * Created by masahiro on 2017/01/24.
+ * MessageResponse
+ *
+ * @property message_id メッセージID
  */
-data class MessageResponse(
-        val message_id: Int
-)
+data class MessageResponse(val message_id: Int)
