@@ -1,7 +1,15 @@
 package com.masahirosaito.chatwork4j.data.my
 
 /**
- * Created by masahiro on 2017/01/19.
+ * Taskデータクラス
+ *
+ * @property task_id タスクID
+ * @property room ルーム
+ * @property assigned_by_account タスクを投げたアカウント
+ * @property message_id メッセージID
+ * @property body メッセージ本文
+ * @property limit_time タスク期日
+ * @property status タスク状態
  */
 data class Task(
         val task_id: Int,
@@ -11,6 +19,4 @@ data class Task(
         val body: String,
         val limit_time: Long,
         val status: String
-) {
-    enum class Status { OPEN, DONE }
-}
+)

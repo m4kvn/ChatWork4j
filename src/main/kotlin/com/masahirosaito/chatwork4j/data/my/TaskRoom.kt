@@ -1,7 +1,11 @@
 package com.masahirosaito.chatwork4j.data.my
 
 /**
- * Created by masahiro on 2017/01/19.
+ * TaskRoomデータクラス
+ *
+ * @property room_id ルームID
+ * @property name 名前
+ * @property icon_path アイコン画像URL
  */
 data class TaskRoom(
         val room_id: Int,

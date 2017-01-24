@@ -1,7 +1,11 @@
 package com.masahirosaito.chatwork4j.data.my
 
 /**
- * Created by masahiro on 2017/01/19.
+ * AssignedByAccount
+ *
+ * @property account_id アカウントID
+ * @property name アカウント名
+ * @property avatar_image_url アカウントアバター画像URL
  */
 data class AssignedByAccount(
         val account_id: Int,
