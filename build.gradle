@@ -1,5 +1,5 @@
 group 'com.MasahiroSaito'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 buildscript {
     ext.kotlin_version = '1.0.6'
@@ -28,7 +28,6 @@ configurations {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'junit', name: 'junit', version: '4.11'
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
     compile 'com.google.code.gson:gson:2.8.0'
@@ -38,4 +37,14 @@ dependencies {
 
 jar {
     from configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
+}
+
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file:${projectDir}/repo")
+        }
+    }
 }
