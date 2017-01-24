@@ -2,42 +2,18 @@ package com.masahirosaito.chatwork4j.data
 
 import java.util.*
 
-/** MemberResponseクラス */
-class MemberResponse {
-
-    /** 管理者権限アカウントID一覧 */
-    val admin: Array<Int>
-
-    /** メンバー権限アカウントID一覧 */
-    val member: Array<Int>
-
-    /** 閲覧のみ権限アカウントID一覧 */
+/**
+ * MemberResponse
+ *
+ * @property admin 管理者権アカウントID一覧
+ * @property member メンバー権限アカウントID一覧
+ * @property readonly 閲覧のみ権限アカウントID一覧
+ */
+data class MemberResponse(
+    val admin: Array<Int>,
+    val member: Array<Int>,
     val readonly: Array<Int>
-
-    /**
-     * コンストラクタ
-     *
-     * @param admin 管理者権限アカウントID一覧
-     * @param member メンバー権限アカウントID一覧
-     * @param readonly 閲覧のみ権限アカウントID一覧
-     */
-    constructor(admin: Array<Int>, member: Array<Int>, readonly: Array<Int>) {
-        this.admin = admin
-        this.member = member
-        this.readonly = readonly
-    }
-
-    /**
-     * 文字列として取得
-     *
-     * @return オブジェクトの文字列
-     */
-    override fun toString(): String {
-        return "MemberResponse(admin=${Arrays.toString(admin)}" +
-                ", member=${Arrays.toString(member)}" +
-                ", readonly=${Arrays.toString(readonly)})"
-    }
-
+) {
     /**
      * 他のオブジェクトと比較
      *

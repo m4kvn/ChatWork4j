@@ -20,19 +20,20 @@ import okhttp3.*
 /**
  * ChatWork API を利用するためのクラス
  *
- * @param TOKEN ChatWork API TOKEN
+ * @property TOKEN ChatWorkAPI TOKEN
+ * @property client HTTP通信用クライアント
  */
 class ChatWork4j(private val TOKEN: String) {
-
-    /** HTTP通信用クライアント */
     private val client = OkHttpClient()
 
+    /**
+     * companion objects
+     *
+     * @property CHATWORK_API_URL_ROOT ChatWork API URL
+     * @property CHATWORK_API_TOKEN_HEADER ChatWork API Header
+     */
     companion object {
-
-        /** ChatWork API URL */
         val CHATWORK_API_URL_ROOT = "https://api.chatwork.com/v1"
-
-        /** ChatWork API Header */
         val CHATWORK_API_TOKEN_HEADER = "X-ChatWorkToken"
     }
 
