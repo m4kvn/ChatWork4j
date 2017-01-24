@@ -1,8 +1,8 @@
 package com.masahirosaito.chatwork4j.data
 
-/** RoomResponseデータクラス */
-data class RoomResponse(
-
-        /** ルームID */
-        val room_id: Int
-)
+/**
+ * RoomResponse
+ *
+ * @property room_id ルームID
+ */
+data class RoomResponse(val room_id: Int)
