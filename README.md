@@ -7,7 +7,11 @@
 
 | ChatWork4j Version | ChatWork API Version |
 | :----------------: | :------------------: |
-| [1.0](https://github.com/MasahiroSaito/ChatWork4j/raw/master/repo/com/MasahiroSaito/ChatWork4j/1.0/ChatWork4j-1.0.jar) | v1 |
+| [1.1](https://github.com/MasahiroSaito/ChatWork4j/raw/master/repo/com/MasahiroSaito/ChatWork4j/1.1/ChatWork4j-1.1.jar) | v1 |
+
+## Javadoc
+
+[https://masahirosaito.github.io/ChatWork4j/](https://masahirosaito.github.io/ChatWork4j/)
 
 ## 依存関係に追加する
 
@@ -19,7 +23,7 @@
 | :--------- | :---------------- |
 | groupId    | com.MasahiroSaito |
 | artifactId | ChatWork4j        |
-| version    | 1.0               |
+| version    | 1.1               |
 
 ### Gradle Example build.gradle
 
@@ -37,7 +41,7 @@ Gradle の build.gradle に以下をそれぞれ追加する
 #### dependencies
 
 ```gradle
-    compile 'com.MasahiroSaito:ChatWork4j:1.0'
+    compile 'com.MasahiroSaito:ChatWork4j:1.1'
 ```
 
 ### Maven Example pom.xml
@@ -59,6 +63,6 @@ Maven の pom.xml に以下をそれぞれ追加する
   <dependency>
     <groupId>com.Nepian.Spigot</groupId>
     <artifactId>Core</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
   </dependency>
 ```
