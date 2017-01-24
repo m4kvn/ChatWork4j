@@ -55,11 +55,11 @@ uploadArchives {
 apply plugin: 'org.jetbrains.dokka'
 
 dokka {
-    outputFormat = 'jekyll'
+    outputFormat = 'javadoc'
     outputDirectory = "$projectDir/docs"
-    linkMapping {
-        dir = "src/main/kotlin"
-        url = "https://github.com/MasahiroSaito/ChatWork4j/tree/master/src/main/kotlin"
-        suffix = "#L"
-    }
+//    linkMapping {
+//        dir = "src/main/kotlin"
+//        url = "https://github.com/MasahiroSaito/ChatWork4j/tree/master/src/main/kotlin"
+//        suffix = "#L"
+//    }
 }
