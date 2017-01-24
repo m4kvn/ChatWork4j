@@ -1,7 +1,15 @@
 package com.masahirosaito.chatwork4j.data.rooms
 
 /**
- * Created by masahiro on 2017/01/19.
+ * Fileデータクラス
+ *
+ * @property file_id ファイルID
+ * @property account アカウント
+ * @property message_id メッセージID
+ * @property filename ファイル名
+ * @property filesize ファイルサイズ
+ * @property upload_time アップロード時間
+ * @property download_url ダウンロードURL
  */
 data class File(
         val file_id: Int,

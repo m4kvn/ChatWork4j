@@ -4,7 +4,9 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 
 /**
- * Created by masahiro on 2017/01/24.
+ * ResponseErrorsException
+ *
+ * @param json エラーレスポンスのJSON文字列
  */
 class ResponseErrorsException(json: String) : ChatWork4jException(
         GsonBuilder().setPrettyPrinting().create().toJson(

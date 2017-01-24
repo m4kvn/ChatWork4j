@@ -3,25 +3,23 @@ package com.masahirosaito.chatwork4j.data
 import java.util.*
 
 /**
- * Created by masahiro on 2017/01/23.
+ * MemberResponse
+ *
+ * @property admin 管理者権アカウントID一覧
+ * @property member メンバー権限アカウントID一覧
+ * @property readonly 閲覧のみ権限アカウントID一覧
  */
-class MemberResponse {
-    val admin: Array<Int>
-    val member: Array<Int>
+data class MemberResponse(
+    val admin: Array<Int>,
+    val member: Array<Int>,
     val readonly: Array<Int>
-
-    constructor(admin: Array<Int>, member: Array<Int>, readonly: Array<Int>) {
-        this.admin = admin
-        this.member = member
-        this.readonly = readonly
-    }
-
-    override fun toString(): String {
-        return "MemberResponse(admin=${Arrays.toString(admin)}" +
-                ", member=${Arrays.toString(member)}" +
-                ", readonly=${Arrays.toString(readonly)})"
-    }
-
+) {
+    /**
+     * 他のオブジェクトと比較
+     *
+     * @param other 比較対象
+     * @return 一緒ならtrue
+     */
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other?.javaClass != javaClass) return false
@@ -35,6 +33,11 @@ class MemberResponse {
         return true
     }
 
+    /**
+     * ハッシュコードを取得
+     *
+     * @return ハッシュコード
+     */
     override fun hashCode(): Int {
         var result = Arrays.hashCode(admin)
         result = 31 * result + Arrays.hashCode(member)

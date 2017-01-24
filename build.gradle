@@ -3,12 +3,15 @@ version '1.0'
 
 buildscript {
     ext.kotlin_version = '1.0.6'
+    ext.dokka_version = '0.9.13'
 
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokka_version"
     }
 }
 
@@ -47,4 +50,16 @@ uploadArchives {
             repository(url: "file:${projectDir}/repo")
         }
     }
+}
+
+apply plugin: 'org.jetbrains.dokka'
+
+dokka {
+    outputFormat = 'javadoc'
+    outputDirectory = "$projectDir/docs"
+//    linkMapping {
+//        dir = "src/main/kotlin"
+//        url = "https://github.com/MasahiroSaito/ChatWork4j/tree/master/src/main/kotlin"
+//        suffix = "#L"
+//    }
 }
