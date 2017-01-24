@@ -2,17 +2,19 @@ package com.masahirosaito.chatwork4j.error
 
 import java.util.*
 
-class ResponseError {
-    val errors: Array<String>
+/**
+ * ResponseError
+ *
+ * @property errors　エラーメッセージ一覧
+ */
+data class ResponseError(val errors: Array<String>) {
 
-    constructor(errors: Array<String>) {
-        this.errors = errors
-    }
-
-    override fun toString(): String {
-        return "ResponseError(errors=${Arrays.toString(errors)})"
-    }
-
+    /**
+     * 他のオブジェクトと比較
+     *
+     * @param other 比較対象
+     * @return 一緒ならtrue
+     */
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other?.javaClass != javaClass) return false
@@ -24,6 +26,11 @@ class ResponseError {
         return true
     }
 
+    /**
+     * ハッシュコードを取得
+     *
+     * @return ハッシュコード
+     */
     override fun hashCode(): Int {
         return Arrays.hashCode(errors)
     }

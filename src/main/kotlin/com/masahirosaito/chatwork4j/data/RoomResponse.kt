@@ -1,8 +1,8 @@
 package com.masahirosaito.chatwork4j.data
 
-/**
- * Created by masahiro on 2017/01/23.
- */
+/** RoomResponseデータクラス */
 data class RoomResponse(
+
+        /** ルームID */
         val room_id: Int
 )
