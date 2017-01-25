@@ -49,8 +49,8 @@ You can use **ChatWork4j** by adding it to your _maven_ or _gradle_ project.
 
 ```xml
   <repository>
-    <id>core-repo</id>
-    <url>https://github.com/MasahiroSaito/Core/raw/master/mvn-repo</url>
+    <id>chatwork4j-repo</id>
+    <url>https://github.com/MasahiroSaito/ChatWork4j/raw/master/repo</url>
   </repository>
 ```
 
@@ -58,8 +58,8 @@ You can use **ChatWork4j** by adding it to your _maven_ or _gradle_ project.
 
 ```xml
   <dependency>
-    <groupId>com.Nepian.Spigot</groupId>
-    <artifactId>Core</artifactId>
+    <groupId>com.MasahiroSaito</groupId>
+    <artifactId>ChatWork4j</artifactId>
     <version>1.1</version>
   </dependency>
 ```
