@@ -1,9 +1,10 @@
 # ChatWork4j
 
-**ChatWork4j** は [ChatWork API](http://developer.chatwork.com/ja/) を *Java* で利用するためのライブラリです。
-直接ダウンロードしてビルドパスに追加するか、Maven や Gradle などの依存関係に追加する形で利用できます。
+**ChatWork4j** is the Library for _Java_ to use [ChatWork API](http://developer.chatwork.com/ja/).
 
-## ダウンロード
+You can use **ChatWork4j** by adding it to your _maven_ or _gradle_ project.
+
+## Downloads
 
 | ChatWork4j Version | ChatWork API Version |
 | :----------------: | :------------------: |
@@ -13,7 +14,7 @@
 
 [https://masahirosaito.github.io/ChatWork4j/](https://masahirosaito.github.io/ChatWork4j/)
 
-## 依存関係に追加する
+## How to add to dependency
 
 | repository url                                              |
 | :---------------------------------------------------------- |
@@ -25,9 +26,7 @@
 | artifactId | ChatWork4j        |
 | version    | 1.1               |
 
-### Gradle Example build.gradle
-
-Gradle の build.gradle に以下をそれぞれ追加する
+### Gradle in [build.gradle]()
 
 #### repositories
 
@@ -44,16 +43,14 @@ Gradle の build.gradle に以下をそれぞれ追加する
     compile 'com.MasahiroSaito:ChatWork4j:1.1'
 ```
 
-### Maven Example pom.xml
-
-Maven の pom.xml に以下をそれぞれ追加する
+### Maven in [pom.xml]()
 
 #### repositories
 
 ```xml
   <repository>
-    <id>core-repo</id>
-    <url>https://github.com/MasahiroSaito/Core/raw/master/mvn-repo</url>
+    <id>chatwork4j-repo</id>
+    <url>https://github.com/MasahiroSaito/ChatWork4j/raw/master/repo</url>
   </repository>
 ```
 
@@ -61,8 +58,8 @@ Maven の pom.xml に以下をそれぞれ追加する
 
 ```xml
   <dependency>
-    <groupId>com.Nepian.Spigot</groupId>
-    <artifactId>Core</artifactId>
+    <groupId>com.MasahiroSaito</groupId>
+    <artifactId>ChatWork4j</artifactId>
     <version>1.1</version>
   </dependency>
 ```
