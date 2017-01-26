@@ -33,7 +33,7 @@ class ChatWork4j(private val TOKEN: String) {
      * @property CHATWORK_API_TOKEN_HEADER ChatWork API Header
      */
     companion object {
-        val CHATWORK_API_URL_ROOT = "https://api.chatwork.com/v1"
+        val CHATWORK_API_URL_ROOT = "https://api.chatwork.com/v2"
         val CHATWORK_API_TOKEN_HEADER = "X-ChatWorkToken"
     }
 
