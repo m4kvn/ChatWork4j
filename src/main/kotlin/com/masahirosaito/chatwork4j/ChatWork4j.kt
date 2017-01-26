@@ -101,21 +101,39 @@ class ChatWork4j(private val TOKEN: String) {
      *
      * @return 自分のタスク一覧
      */
-    fun getMyTasks(): Array<Task> = newObjectFromJson(get("/my/tasks"), Array<Task>::class.java)
+    fun getMyTasks(): Array<Task> {
+        try {
+            return newObjectFromJson(get("/my/tasks"), Array<Task>::class.java)
+        } catch(e: NullOrBlankResponseException) {
+            return emptyArray()
+        }
+    }
 
     /**
      * 自分のコンタクト一覧を取得
      *
      * @return 自分のコンタクト一覧を取得
      */
-    fun getContacts(): Array<Contact> = newObjectFromJson(get("/contacts"), Array<Contact>::class.java)
+    fun getContacts(): Array<Contact> {
+        try {
+            return newObjectFromJson(get("/contacts"), Array<Contact>::class.java)
+        } catch(e: NullOrBlankResponseException) {
+            return emptyArray()
+        }
+    }
 
     /**
      * チャットルーム一覧を取得
      *
      * @return チャットールーム一覧
      */
-    fun getRooms(): Array<Room> = newObjectFromJson(get("/rooms"), Array<Room>::class.java)
+    fun getRooms(): Array<Room> {
+        try {
+            return newObjectFromJson(get("/rooms"), Array<Room>::class.java)
+        } catch(e: NullOrBlankResponseException) {
+            return emptyArray()
+        }
+    }
 
     /**
      * チャットルームを取得
@@ -216,8 +234,13 @@ class ChatWork4j(private val TOKEN: String) {
      * @param room_id チャットルームID
      * @return チャットルームのメンバー一覧
      */
-    fun getMembers(room_id: Int): Array<Member> =
-            newObjectFromJson(get("/rooms/$room_id/members"), Array<Member>::class.java)
+    fun getMembers(room_id: Int): Array<Member> {
+        try {
+            return newObjectFromJson(get("/rooms/$room_id/members"), Array<Member>::class.java)
+        } catch(e: NullOrBlankResponseException) {
+            return emptyArray()
+        }
+    }
 
     /**
      * チャットルームのメンバーを更新
@@ -263,7 +286,11 @@ class ChatWork4j(private val TOKEN: String) {
             append("/rooms/$room_id/messages?force=")
             if (force) append("1") else append("0")
         }
-        return newObjectFromJson(get(url), Array<Message>::class.java)
+        try {
+            return newObjectFromJson(get(url), Array<Message>::class.java)
+        } catch(e: NullOrBlankResponseException) {
+            return emptyArray()
+        }
     }
 
     /**
@@ -324,7 +351,11 @@ class ChatWork4j(private val TOKEN: String) {
             }
         }
 
-        return newObjectFromJson(get(url), Array<Task>::class.java)
+        try {
+            return newObjectFromJson(get(url), Array<Task>::class.java)
+        } catch(e: NullOrBlankResponseException) {
+            return emptyArray()
+        }
     }
 
     /**
@@ -339,7 +370,11 @@ class ChatWork4j(private val TOKEN: String) {
             append("/rooms/$room_id/files")
             if (accountId != null) append("?account_id=$accountId")
         }
-        return newObjectFromJson(get(url), Array<File>::class.java)
+        try {
+            return newObjectFromJson(get(url), Array<File>::class.java)
+        } catch(e: NullOrBlankResponseException) {
+            return emptyArray()
+        }
     }
 
     /**
