@@ -9,6 +9,7 @@ You can use **ChatWork4j** by adding it to your _maven_ or _gradle_ project.
 | ChatWork4j Version | ChatWork API Version |
 | :----------------: | :------------------: |
 | [1.2](https://github.com/MasahiroSaito/ChatWork4j/raw/master/repo/com/MasahiroSaito/ChatWork4j/1.2/ChatWork4j-1.2.jar) | v1 |
+| [2.0](https://github.com/MasahiroSaito/ChatWork4j/raw/master/repo/com/MasahiroSaito/ChatWork4j/2.0/ChatWork4j-2.0.jar) | v2 |
 
 ## Javadoc
 
@@ -24,7 +25,7 @@ You can use **ChatWork4j** by adding it to your _maven_ or _gradle_ project.
 | :--------- | :---------------- |
 | groupId    | com.MasahiroSaito |
 | artifactId | ChatWork4j        |
-| version    | 1.2               |
+| version    | 2.0               |
 
 ### Gradle in [build.gradle]()
 
@@ -40,7 +41,7 @@ You can use **ChatWork4j** by adding it to your _maven_ or _gradle_ project.
 #### dependencies
 
 ```gradle
-    compile 'com.MasahiroSaito:ChatWork4j:1.2'
+    compile 'com.MasahiroSaito:ChatWork4j:2.0'
 ```
 
 ### Maven in [pom.xml]()
@@ -60,6 +61,6 @@ You can use **ChatWork4j** by adding it to your _maven_ or _gradle_ project.
   <dependency>
     <groupId>com.MasahiroSaito</groupId>
     <artifactId>ChatWork4j</artifactId>
-    <version>1.2</version>
+    <version>2.0</version>
   </dependency>
 ```
