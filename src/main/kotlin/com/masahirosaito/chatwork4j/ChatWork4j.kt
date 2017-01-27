@@ -422,4 +422,12 @@ class ChatWork4j(private val TOKEN: String) {
     fun putIncomingRequest(request_id: Int): IncomingRequestResponse = newObjectFromJson(
             put("/incoming_requests/$request_id", FormBody.Builder().build()),
             IncomingRequestResponse::class.java)
+
+    /**
+     * 自分に対するコンタクト認証依頼をキャンセル
+     *
+     * @param request_id リクエストID
+     */
+    fun deleteIncomingRequest(request_id: Int): String =
+            delete("/incoming_requests/$request_id", FormBody.Builder().build())
 }
