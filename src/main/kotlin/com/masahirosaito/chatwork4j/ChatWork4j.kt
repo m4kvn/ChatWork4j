@@ -4,8 +4,10 @@ import com.google.gson.Gson
 import com.masahirosaito.chatwork4j.data.MemberResponse
 import com.masahirosaito.chatwork4j.data.MessageResponse
 import com.masahirosaito.chatwork4j.data.RoomResponse
-import com.masahirosaito.chatwork4j.data.me.Me
 import com.masahirosaito.chatwork4j.data.contacts.Contact
+import com.masahirosaito.chatwork4j.data.incomingrequests.IncomingRequest
+import com.masahirosaito.chatwork4j.data.incomingrequests.IncomingRequestResponse
+import com.masahirosaito.chatwork4j.data.me.Me
 import com.masahirosaito.chatwork4j.data.my.Status
 import com.masahirosaito.chatwork4j.data.my.Task
 import com.masahirosaito.chatwork4j.data.my.TaskStatus
@@ -13,9 +15,12 @@ import com.masahirosaito.chatwork4j.data.rooms.File
 import com.masahirosaito.chatwork4j.data.rooms.Member
 import com.masahirosaito.chatwork4j.data.rooms.Message
 import com.masahirosaito.chatwork4j.data.rooms.Room
-import com.masahirosaito.chatwork4j.error.ResponseErrorsException
 import com.masahirosaito.chatwork4j.error.NullOrBlankResponseException
-import okhttp3.*
+import com.masahirosaito.chatwork4j.error.ResponseErrorsException
+import okhttp3.FormBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 
 /**
  * ChatWork API を利用するためのクラス
@@ -29,11 +34,11 @@ class ChatWork4j(private val TOKEN: String) {
     /**
      * companion objects
      *
-     * @property CHATWORK_API_URL_ROOT ChatWork API URL
+     * @property CHATWORK_API_URL_ROOT ChatWork API エンドポイントのベースURL
      * @property CHATWORK_API_TOKEN_HEADER ChatWork API Header
      */
     companion object {
-        val CHATWORK_API_URL_ROOT = "https://api.chatwork.com/v1"
+        val CHATWORK_API_URL_ROOT = "https://api.chatwork.com/v2"
         val CHATWORK_API_TOKEN_HEADER = "X-ChatWorkToken"
     }
 
@@ -391,4 +396,38 @@ class ChatWork4j(private val TOKEN: String) {
         }
         return newObjectFromJson(get(url), File::class.java)
     }
+
+    /**
+     * 自分に対するコンタクト認証依頼一覧を取得
+     *
+     * 自分に対するコンタクト認証依頼一覧を100件まで取得可能
+     * (今後、より多くのデータを取得するためのページネーションの仕組みを提供予定 by ChatWork)
+     *
+     * @return 自分に対するコンタクト認証依頼がない場合は空の配列を返します。
+     */
+    fun getIncomingRequests(): Array<IncomingRequest> {
+        try {
+            return newObjectFromJson(get("/incoming_requests"), Array<IncomingRequest>::class.java)
+        } catch(e: NullOrBlankResponseException) {
+            return emptyArray()
+        }
+    }
+
+    /**
+     * 自分に対するコンタクト認証依頼を承認
+     *
+     * @param request_id リクエストID
+     * @return 自分に対するコンタクト認証依頼承認データ
+     */
+    fun putIncomingRequest(request_id: Int): IncomingRequestResponse = newObjectFromJson(
+            put("/incoming_requests/$request_id", FormBody.Builder().build()),
+            IncomingRequestResponse::class.java)
+
+    /**
+     * 自分に対するコンタクト認証依頼をキャンセル
+     *
+     * @param request_id リクエストID
+     */
+    fun deleteIncomingRequest(request_id: Int): String =
+            delete("/incoming_requests/$request_id", FormBody.Builder().build())
 }

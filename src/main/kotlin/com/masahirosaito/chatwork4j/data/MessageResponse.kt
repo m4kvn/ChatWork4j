@@ -3,6 +3,6 @@ package com.masahirosaito.chatwork4j.data
 /**
  * MessageResponse
  *
- * @property message_id メッセージID
+ * @property message_id メッセージIDの文字列
  */
-data class MessageResponse(val message_id: Int)
+data class MessageResponse(val message_id: String)
