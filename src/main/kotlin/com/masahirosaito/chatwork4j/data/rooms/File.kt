@@ -5,7 +5,7 @@ package com.masahirosaito.chatwork4j.data.rooms
  *
  * @property file_id ファイルID
  * @property account アカウント
- * @property message_id メッセージID
+ * @property message_id メッセージIDの文字列
  * @property filename ファイル名
  * @property filesize ファイルサイズ
  * @property upload_time アップロード時間
@@ -14,7 +14,7 @@ package com.masahirosaito.chatwork4j.data.rooms
 data class File(
         val file_id: Int,
         val account: Account,
-        val message_id: Int,
+        val message_id: String,
         val filename: String,
         val filesize: Int,
         val upload_time: Long,

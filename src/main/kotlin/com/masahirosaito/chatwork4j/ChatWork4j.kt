@@ -29,7 +29,7 @@ class ChatWork4j(private val TOKEN: String) {
     /**
      * companion objects
      *
-     * @property CHATWORK_API_URL_ROOT ChatWork API URL
+     * @property CHATWORK_API_URL_ROOT ChatWork API エンドポイントのベースURL
      * @property CHATWORK_API_TOKEN_HEADER ChatWork API Header
      */
     companion object {

@@ -15,7 +15,7 @@ data class Task(
         val task_id: Int,
         val room: TaskRoom,
         val assigned_by_account: AssignedByAccount,
-        val message_id: Int,
+        val message_id: String,
         val body: String,
         val limit_time: Long,
         val status: String
