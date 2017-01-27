@@ -6,6 +6,7 @@ import com.masahirosaito.chatwork4j.data.MessageResponse
 import com.masahirosaito.chatwork4j.data.RoomResponse
 import com.masahirosaito.chatwork4j.data.contacts.Contact
 import com.masahirosaito.chatwork4j.data.incomingrequests.IncomingRequest
+import com.masahirosaito.chatwork4j.data.incomingrequests.IncomingRequestResponse
 import com.masahirosaito.chatwork4j.data.me.Me
 import com.masahirosaito.chatwork4j.data.my.Status
 import com.masahirosaito.chatwork4j.data.my.Task
@@ -411,4 +412,14 @@ class ChatWork4j(private val TOKEN: String) {
             return emptyArray()
         }
     }
+
+    /**
+     * 自分に対するコンタクト認証依頼を承認
+     *
+     * @param request_id リクエストID
+     * @return 自分に対するコンタクト認証依頼承認データ
+     */
+    fun putIncomingRequest(request_id: Int): IncomingRequestResponse = newObjectFromJson(
+            put("/incoming_requests/$request_id", FormBody.Builder().build()),
+            IncomingRequestResponse::class.java)
 }
