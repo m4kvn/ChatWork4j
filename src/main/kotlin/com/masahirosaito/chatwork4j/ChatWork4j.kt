@@ -398,12 +398,17 @@ class ChatWork4j(private val TOKEN: String) {
 
     /**
      * 自分に対するコンタクト認証依頼一覧を取得
-     *
+     *
      * 自分に対するコンタクト認証依頼一覧を100件まで取得可能
      * (今後、より多くのデータを取得するためのページネーションの仕組みを提供予定 by ChatWork)
      *
-     * @return 自分に対するコンタクト認証依頼一覧を配列として返す
+     * @return 自分に対するコンタクト認証依頼がない場合は空の配列を返します。
      */
-    fun getIncomingRequests() : Array<IncomingRequest> =
-            newObjectFromJson(get("/incoming_requests"), Array<IncomingRequest>::class.java)
+    fun getIncomingRequests() : Array<IncomingRequest> {
+        try {
+            return newObjectFromJson(get("/incoming_requests"), Array<IncomingRequest>::class.java)
+        } catch(e: NullOrBlankResponseException) {
+            return emptyArray()
+        }
+    }
 }
