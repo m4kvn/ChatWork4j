@@ -4,8 +4,9 @@ import com.google.gson.Gson
 import com.masahirosaito.chatwork4j.data.MemberResponse
 import com.masahirosaito.chatwork4j.data.MessageResponse
 import com.masahirosaito.chatwork4j.data.RoomResponse
-import com.masahirosaito.chatwork4j.data.me.Me
 import com.masahirosaito.chatwork4j.data.contacts.Contact
+import com.masahirosaito.chatwork4j.data.incomingrequests.IncomingRequest
+import com.masahirosaito.chatwork4j.data.me.Me
 import com.masahirosaito.chatwork4j.data.my.Status
 import com.masahirosaito.chatwork4j.data.my.Task
 import com.masahirosaito.chatwork4j.data.my.TaskStatus
@@ -13,9 +14,12 @@ import com.masahirosaito.chatwork4j.data.rooms.File
 import com.masahirosaito.chatwork4j.data.rooms.Member
 import com.masahirosaito.chatwork4j.data.rooms.Message
 import com.masahirosaito.chatwork4j.data.rooms.Room
-import com.masahirosaito.chatwork4j.error.ResponseErrorsException
 import com.masahirosaito.chatwork4j.error.NullOrBlankResponseException
-import okhttp3.*
+import com.masahirosaito.chatwork4j.error.ResponseErrorsException
+import okhttp3.FormBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 
 /**
  * ChatWork API を利用するためのクラス
@@ -391,4 +395,15 @@ class ChatWork4j(private val TOKEN: String) {
         }
         return newObjectFromJson(get(url), File::class.java)
     }
+
+    /**
+     * 自分に対するコンタクト認証依頼一覧を取得
+     *
+     * 自分に対するコンタクト認証依頼一覧を100件まで取得可能
+     * (今後、より多くのデータを取得するためのページネーションの仕組みを提供予定 by ChatWork)
+     *
+     * @return 自分に対するコンタクト認証依頼一覧を配列として返す
+     */
+    fun getIncomingRequests() : Array<IncomingRequest> =
+            newObjectFromJson(get("/incoming_requests"), Array<IncomingRequest>::class.java)
 }
