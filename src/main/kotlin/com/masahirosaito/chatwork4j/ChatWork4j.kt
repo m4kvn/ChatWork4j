@@ -405,7 +405,7 @@ class ChatWork4j(private val TOKEN: String) {
      *
      * @return 自分に対するコンタクト認証依頼がない場合は空の配列を返します。
      */
-    fun getIncomingRequests() : Array<IncomingRequest> {
+    fun getIncomingRequests(): Array<IncomingRequest> {
         try {
             return newObjectFromJson(get("/incoming_requests"), Array<IncomingRequest>::class.java)
         } catch(e: NullOrBlankResponseException) {
